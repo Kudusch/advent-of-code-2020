@@ -44,10 +44,21 @@ for i in range(1, len(adapter_chain)-1):
         skippable_adapters.append(adapter_chain[i])
         skippable_adapters_count += 1
 
-solution_2 = 2**skippable_adapters_count
 possible_combinations_window = []
 for i in range(1, len(adapter_chain)-1):
     if adapter_chain[i] in skippable_adapters:
-        solution_2 = solution_2*2
+        possible_combinations_window.append("1")
+    else:
+        possible_combinations_window.append("0")
 
-print(solution_2)
+m = 0
+n = 0
+for l in "".join(possible_combinations_window).split("0"):
+    if len(l) > 0:
+        if len(l) == 3:
+            m += 1
+        else:
+            n += len(l)
+
+possible_combinations = (((2**3)-1)**m)*(2**n)
+print("There are {} possible combinations".format(possible_combinations))
